@@ -53,9 +53,9 @@ const LandingPage = () => {
         </div>
 
         {/* Hero Section */}
-        <div className="flex flex-col items-center justify-center py-16 my-8">
-          <div className="w-full max-w-4xl rounded-tl-[300px] rounded-tr-[100px] rounded-br-[10px] rounded-bl-[150px] overflow-hidden mb-6 relative max-h-[400px] min-w-[800px]">
-          <img src={HeroCompo} alt="Hero Compo" className="absolute bg-black -top-8 -left-8 w-32 h-32 z-20 rotate-[-15deg]" />
+        <div className="flex flex-col items-center justify-center py-16 my-8 relative">
+          <img src={HeroCompo} alt="Hero Compo" className="absolute -top-0 -left-0 w-32 h-32 z-20 rotate-[-10deg] mt-24 ml-24" />
+          <div className="w-full max-w-4xl rounded-tl-[300px] rounded-tr-[100px] rounded-br-[10px] rounded-bl-[150px] overflow-hidden mb-6 relative h-100 ">
             <img src={HeroBg} alt="Woodworking craftsman" className="w-full h-full object-cover" />
             <div className="absolute inset-0"></div>
             <h1 className="absolute inset-0 flex items-center justify-center text-6xl font-bold text-white text-center drop-shadow-lg">
