@@ -70,6 +70,11 @@ const LandingPage = () => {
     }
   };
 
+  const [favoriteArrivals, setFavoriteArrivals] = useState(Array(newArrivals.length).fill(false));
+  const handleToggleFavorite = (idx) => {
+    setFavoriteArrivals(favs => favs.map((f, i) => i === idx ? !f : f));
+  };
+
   useEffect(() => {
     setTypedText("");
     setCurrentIdx(0);
@@ -208,9 +213,11 @@ const LandingPage = () => {
           <div ref={scrollRef} className="flex gap-8 overflow-x-auto pb-4 scrollbar-hide" style={{scrollbarWidth: 'none'}}>
             {newArrivals.map((product, index) => (
               <div key={index} className="min-w-[260px] max-w-[260px] bg-white rounded-xl shadow p-4 flex flex-col items-center relative">
+                <button onClick={() => handleToggleFavorite(index)} className="absolute top-4 right-4 z-10">
+                  <HeartIcon className={`w-6 h-6 transition-colors duration-200 ${favoriteArrivals[index] ? 'fill-red-500 text-red-500' : 'text-gray-400'}`} fill={favoriteArrivals[index] ? 'red' : 'none'} />
+                </button>
                 <div className="flex w-full justify-between items-center mb-2">
                   {product.tag && <span className="text-xs font-bold text-orange-400">{product.tag}</span>}
-                  <button className="text-gray-400 hover:text-red-500"><HeartIcon className="w-5 h-5" /></button>
                 </div>
                 {product.discount && <span className="absolute left-4 top-8 bg-green-500 text-white text-xs px-2 py-1 rounded">{product.discount}</span>}
                 <div className="w-full h-36 flex items-center justify-center mb-4">
@@ -323,7 +330,7 @@ const LandingPage = () => {
               <h3 className="font-bold text-lg mb-4">Support</h3>
               <div className="text-white/90 text-sm leading-relaxed mb-2">111 Bijoy sarani, Dhaka,<br/>DH 1515, Bangladesh.</div>
               <div className="text-white/90 text-sm mb-2">exclusive@gmail.com</div>
-              <div className="text-white/90 text-sm">+213567450734</div>
+              <div className="text-white/90 text-sm">+213 - 567450734</div>
             </div>
             <div>
               <h3 className="font-bold text-lg mb-4">Account</h3>
@@ -361,7 +368,7 @@ const LandingPage = () => {
           <hr className="border-white/20 my-8" />
           <div className="text-center text-xs text-white/60 flex items-center justify-center gap-1">
             <span className="text-base">©</span>
-            <span>Copyright Ephyre 2022. All right reserved</span>
+            <span>Copyright Ephyre 2025. All right reserved</span>
           </div>
         </div>
       </footer>
