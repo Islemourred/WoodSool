@@ -90,7 +90,7 @@ const LandingPage = () => {
           return idx;
         }
       });
-    }, 500);
+    }, 120);
     return () => clearInterval(interval);
   }, []);
   
@@ -119,7 +119,7 @@ const LandingPage = () => {
         {/* Navbar */}
         <div className="flex items-center justify-between px-4 md:px-8 py-4 border-b border-gray-100">
           <div className="flex items-center">
-            <img src={Logo} alt="Logo" className="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover" />
+            <img src={Logo} alt="Logo" className="h-10 w-10 md:h-12 md:w-12 object-contain" />
           </div>
           
           {/* Desktop Navigation */}
@@ -203,8 +203,8 @@ const LandingPage = () => {
 
         {/* Hero Section */}
         <div id="home" className="flex flex-col items-center justify-center py-8 md:py-16 my-4 md:my-8 relative">
-          <img src={HeroCompo} alt="Hero Compo" className="hidden md:block absolute -top-0 -left-0 w-32 h-48 w-48 z-20 rotate-[-10deg] mt-12 hero-compo-slide" />
-          <div className="w-full max-w-6xl rounded-tl-[100px] md:rounded-tl-[300px] rounded-tr-[50px] md:rounded-tr-[100px] rounded-br-[10px] rounded-bl-[75px] md:rounded-bl-[150px] overflow-hidden mb-6 relative h-64 md:h-96">
+          <img src={HeroCompo} alt="Hero Compo" className="hidden md:block absolute top-12 -left-12 w-32 h-32 w-48 z-20 rotate-[-10deg] hero-compo-slide" />
+          <div className="w-full max-w-7xl h-full rounded-tl-[100px] md:rounded-tl-[300px] rounded-tr-[50px] md:rounded-tr-[100px] rounded-br-[10px] rounded-bl-[75px] md:rounded-bl-[150px] overflow-hidden mb-6 relative h-64 md:h-96">
             <img src={HeroBg} alt="Woodworking craftsman" className="w-full h-full object-cover" />
             <div className="absolute inset-0"></div>
             <h1 className="absolute inset-0 flex items-center justify-center text-3xl md:text-6xl font-bold text-white text-center drop-shadow-lg">
@@ -426,7 +426,7 @@ const LandingPage = () => {
       
       <style jsx>{`
         .fade-in-letter {
-          animation: fadeInLetter 0.5s ease-in-out forwards;
+          animation: fadeInLetter 0.1s ease-in-out forwards;
           opacity: 0;
         }
         
@@ -446,12 +446,12 @@ const LandingPage = () => {
         }
         
         .hero-compo-slide {
-          animation: slideInFromLeft 1s ease-out;
+          animation: slideInFromLeft 1.5s ease-out;
         }
         
         @keyframes slideInFromLeft {
           from {
-            transform: translateX(-100px) rotate(-10deg);
+            transform: translateX(-500px) rotate(-10deg);
             opacity: 0;
           }
           to {
