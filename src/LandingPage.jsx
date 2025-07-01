@@ -8,8 +8,91 @@ import newWood from './assets/newWood.png';
 import { Truck, CreditCard, Lock, Phone } from 'lucide-react';
 import HeroCompo from './assets/Hero_compo.png';
 import heroimg2 from './assets/Hero_img2.png'
+import modele1 from './assets/Modele1.png'
+import modele2 from './assets/Modele2.png'
+import modele3 from './assets/Modele3.png'
+import { useState, useEffect, useRef } from 'react';
 
 const LandingPage = () => {
+  const [typedText, setTypedText] = useState("");
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const fullText = "WOOD SOOL";
+  const [showCursor, setShowCursor] = useState(true);
+  const newArrivals = [
+    {
+      name: 'Wood ball',
+      price: '750 Da',
+      img: modele1,
+      tag: 'NEW',
+      discount: '-50%'
+    },
+    {
+      name: 'Wood decoration',
+      price: '4000 Da',
+      img: modele2,
+      tag: 'NEW',
+      discount: ''
+    },
+    {
+      name: 'Wood lump',
+      price: '3500 Da',
+      img: modele3,
+      tag: 'NEW',
+      discount: '-50%'
+    },
+    {
+      name: 'Lovetemp I',
+      price: '2000 Da',
+      img: modele1,
+      tag: '',
+      discount: ''
+    },
+    {
+      name: 'Lovetemp M',
+      price: '1200 Da',
+      img: modele2,
+      tag: 'NEW',
+      discount: ''
+    },
+    {
+      name: 'Lovetemp XL',
+      price: '3000 Da',
+      img: modele3,
+      tag: '',
+      discount: ''
+    },
+  ];
+
+  const scrollRef = useRef(null);
+  const handleScrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    setTypedText("");
+    setCurrentIdx(0);
+    const interval = setInterval(() => {
+      setCurrentIdx((idx) => {
+        if (idx < fullText.length) {
+          setTypedText(fullText.slice(0, idx + 1));
+          return idx + 1;
+        } else {
+          clearInterval(interval);
+          return idx;
+        }
+      });
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor((v) => !v);
+    }, 500);
+    return () => clearInterval(cursorInterval);
+  }, []);
+
   return (
     <div className="bg-white min-h-screen w-full">
       {/* Top Bar */}
@@ -32,10 +115,18 @@ const LandingPage = () => {
           </div>
           <nav className="flex-1 flex justify-center">
             <ul className="flex space-x-8 text-gray-700 font-medium">
-              <li className="text-orange-400 font-semibold">Home</li>
-              <li className="hover:text-orange-400 cursor-pointer">Shop</li>
-              <li className="hover:text-orange-400 cursor-pointer">Categories</li>
-              <li className="hover:text-orange-400 cursor-pointer">Contact</li>
+              <li>
+                <a href="#home" className="text-orange-400 font-semibold">Home</a>
+              </li>
+              <li>
+                <a href="#shop" className="hover:text-orange-400 cursor-pointer">Shop</a>
+              </li>
+              <li>
+                <a href="#categories" className="hover:text-orange-400 cursor-pointer">Categories</a>
+              </li>
+              <li>
+                <a href="#contact" className="hover:text-orange-400 cursor-pointer">Contact</a>
+              </li>
             </ul>
           </nav>
           <div className="flex items-center space-x-4">
@@ -54,95 +145,80 @@ const LandingPage = () => {
         </div>
 
         {/* Hero Section */}
-        <div className="flex flex-col items-center justify-center py-16 my-8 relative">
-          <img src={HeroCompo} alt="Hero Compo" className="absolute -top-0 -left-0 w-32 h-32 z-20 rotate-[-10deg] mt-24 ml-24" />
-          <div className="w-full max-w-4xl rounded-tl-[300px] rounded-tr-[100px] rounded-br-[10px] rounded-bl-[150px] overflow-hidden mb-6 relative h-100 ">
+        <div id="home" className="flex flex-col items-center justify-center py-16 my-8 relative">
+          <img src={HeroCompo} alt="Hero Compo" className="absolute -top-0 -left-0 w-32 h-48 w-48 z-20 rotate-[-10deg] mt-12 hero-compo-slide" />
+          <div className="w-full max-w-6xl rounded-tl-[300px] rounded-tr-[100px] rounded-br-[10px] rounded-bl-[150px] overflow-hidden mb-6 relative h-50  ">
             <img src={HeroBg} alt="Woodworking craftsman" className="w-full h-full object-cover" />
             <div className="absolute inset-0"></div>
             <h1 className="absolute inset-0 flex items-center justify-center text-6xl font-bold text-white text-center drop-shadow-lg">
-              Wood sool
+              <span style={{letterSpacing: '0.04em'}}>
+                {typedText.split("").map((char, idx) => (
+                  <span key={idx} className="fade-in-letter" style={{animationDelay: `${idx * 0.08}s`}}>{char}</span>
+                ))}
+                <span className="typing-cursor">{showCursor ? "|" : " "}</span>
+              </span>
             </h1>
           </div>
         </div>
 
         {/* Top Wood Furniture Section */}
-        <div className="bg-gray-100 rounded-3xl p-8 mb-12">
+        <div id="shop" className="bg-[#EFEFEF] rounded-xl p-12 mb-12">
           <div className="flex justify-between items-center mb-8">
             <div>
-              <h2 className="text-3xl font-bold text-orange-400 mb-2">Choose Our Top wood</h2>
-              <h2 className="text-3xl font-bold text-orange-400">Furniture</h2>
-              <button className="bg-orange-400 text-white px-6 py-2 rounded-full mt-4 hover:bg-orange-500">
+              <h2 className="text-5xl font-bold text-orange-400 mb-2">Choose Our Top wood</h2>
+              <h2 className="text-5xl font-bold text-orange-400">Furniture</h2>
+              <button className="bg-orange-400 text-white px-6 py-2 rounded-xl mt-8 hover:bg-orange-500">
                 Shop Now
               </button>
             </div>
-            <div className="w-32 h-32 flex items-center justify-center">
+            <div className="w-64 h-64 flex items-center justify-center">
               <img
                 src={heroimg2}
                 alt="Wooden bowl"
-                className="w-28 h-28 object-contain rounded-full"
+                className="w-64 h-64 object-contain rounded-full"
               />
             </div>
           </div>
+        </div>
 
-          {/* Product Grid */}
-          <div className="grid grid-cols-3 gap-6 mb-8">
-            {[heroimg2,heroimg2
-            ].map((imgSrc, index) => (
-              <div key={index} className="bg-white rounded-2xl p-4 text-center">
-                <div className="w-full h-32 mb-4 bg-gray-200 rounded-xl flex items-center justify-center">
-                  <img
-                    src={imgSrc}
-                    alt={`Product ${index + 1}`}
-                    className="w-20 h-20 object-contain"
-                  />
-                </div>
-                <h3 className="font-semibold text-gray-800">Module 1</h3>
-                <p className="text-gray-500 text-sm">30000DA</p>
+        {/* Product Grid */}
+        <div className="grid grid-cols-3 gap-6 mb-8">
+          {[modele1,modele3,modele2,modele3,modele2,modele1
+          ].map((imgSrc, index) => (
+            <div key={index} className="bg-white rounded-xl p-4">
+              <div className="w-full h-64 mb-4 bg-[#EFEFEF] rounded-xl flex items-center justify-center">
+                <img
+                  src={imgSrc}
+                  alt={`Product ${index + 1}`}
+                  className="w-48 h-48 object-contain"
+                />
               </div>
-            ))}
-          </div>
+              <h3 className="font-semibold text-gray-800 text-lg">Module 1</h3>
+              <p className="text-gray-500 text-md">30000DA</p>
+            </div>
+          ))}
         </div>
 
         {/* New Arrivals Section */}
-        <div className="mb-12">
+        <div id="categories" className="mb-12">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold text-orange-400">New Arrivals</h2>
-            <button className="text-orange-400 hover:text-orange-500">View Products →</button>
+            <h2 className="text-4xl font-bold text-orange-400">New Arrivals</h2>
+            <button onClick={handleScrollRight} className="text-orange-400 hover:text-orange-500 flex items-center gap-1">More Products <span>→</span></button>
           </div>
-
-          <div className="grid grid-cols-5 gap-6">
-            {[
-              { name: "Wood bowl", price: "300 Dh", tag: "Sale" },
-              { name: "Wood decoration", price: "250 Dh", tag: "New" },
-              { name: "Wood lamp", price: "180 Dh", tag: "New" },
-              { name: "Luxurious", price: "200 Dh", tag: "" },
-              { name: "Luxurious kit", price: "150 Dh", tag: "Hot" },
-            ].map((product, index) => (
-              <div key={index} className="bg-white border border-gray-200 rounded-2xl p-4 relative">
-                {product.tag && (
-                  <span
-                    className={`absolute top-2 left-2 px-2 py-1 text-xs rounded-full text-white ${
-                      product.tag === "Sale" ? "bg-green-500" : product.tag === "New" ? "bg-blue-500" : "bg-red-500"
-                    }`}
-                  >
-                    {product.tag}
-                  </span>
-                )}
-                <div className="flex justify-end mb-2">
-                  <HeartIcon className="w-4 h-4 text-gray-400 hover:text-red-500 cursor-pointer" />
+          <div ref={scrollRef} className="flex gap-8 overflow-x-auto pb-4 scrollbar-hide" style={{scrollbarWidth: 'none'}}>
+            {newArrivals.map((product, index) => (
+              <div key={index} className="min-w-[260px] max-w-[260px] bg-white rounded-xl shadow p-4 flex flex-col items-center relative">
+                <div className="flex w-full justify-between items-center mb-2">
+                  {product.tag && <span className="text-xs font-bold text-orange-400">{product.tag}</span>}
+                  <button className="text-gray-400 hover:text-red-500"><HeartIcon className="w-5 h-5" /></button>
                 </div>
-                <div className="w-full h-32 mb-4 bg-gray-100 rounded-xl flex items-center justify-center">
-                  <img
-                    src="/placeholder.svg?height=80&width=80"
-                    alt={product.name}
-                    className="w-16 h-16 object-cover"
-                  />
+                {product.discount && <span className="absolute left-4 top-8 bg-green-500 text-white text-xs px-2 py-1 rounded">{product.discount}</span>}
+                <div className="w-full h-36 flex items-center justify-center mb-4">
+                  <img src={product.img} alt={product.name} className="h-32 object-contain" />
                 </div>
-                <h3 className="font-semibold text-gray-800 mb-1">{product.name}</h3>
-                <p className="text-orange-400 font-bold mb-3">{product.price}</p>
-                <button className="w-full bg-orange-400 text-white py-2 rounded-full text-sm hover:bg-orange-500">
-                  Add to cart
-                </button>
+                <button className="w-full bg-orange-400 text-white py-2 rounded-md text-sm font-semibold mb-2 hover:bg-orange-500 transition">Add to cart</button>
+                <h3 className="font-semibold text-gray-800 text-base text-center">{product.name}</h3>
+                <p className="text-gray-500 text-sm text-center">{product.price}</p>
               </div>
             ))}
           </div>
@@ -206,6 +282,7 @@ const LandingPage = () => {
 
       {/* Newsletter Section */}
       <div
+        id="contact"
         className="p-12 text-center relative overflow-hidden flex items-center justify-center min-h-[300px] "
         style={{
           backgroundImage: `url(${BgJoinUs})`,
