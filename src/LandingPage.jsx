@@ -7,6 +7,7 @@ import BgJoinUs from './assets/bg-JoinUS.png';
 import newWood from './assets/newWood.png';
 import { Truck, CreditCard, Lock, Phone } from 'lucide-react';
 import HeroCompo from './assets/Hero_compo.png';
+import heroimg2 from './assets/Hero_img2.png'
 
 const LandingPage = () => {
   return (
@@ -27,7 +28,7 @@ const LandingPage = () => {
         {/* Navbar */}
         <div className="flex items-center justify-between px-8 py-4 border-b border-gray-100">
           <div className="flex items-center">
-            <img src={Logo} alt="Logo" className="h-8 w-8" />
+            <img src={Logo} alt="Logo" className="h-12 w-12" />
           </div>
           <nav className="flex-1 flex justify-center">
             <ul className="flex space-x-8 text-gray-700 font-medium">
@@ -74,28 +75,29 @@ const LandingPage = () => {
                 Shop Now
               </button>
             </div>
-            <div className="w-32 h-32">
+            <div className="w-32 h-32 flex items-center justify-center">
               <img
-                src="/placeholder.svg?height=128&width=128"
+                src={heroimg2}
                 alt="Wooden bowl"
-                className="w-full h-full object-cover rounded-full"
+                className="w-28 h-28 object-contain rounded-full"
               />
             </div>
           </div>
 
           {/* Product Grid */}
           <div className="grid grid-cols-3 gap-6 mb-8">
-            {[1, 2, 3, 4, 5, 6].map((item, index) => (
-              <div key={item} className="bg-white rounded-2xl p-4 text-center">
+            {[heroimg2,heroimg2
+            ].map((imgSrc, index) => (
+              <div key={index} className="bg-white rounded-2xl p-4 text-center">
                 <div className="w-full h-32 mb-4 bg-gray-200 rounded-xl flex items-center justify-center">
                   <img
-                    src={`/placeholder.svg?height=100&width=100`}
-                    alt={`Product ${item}`}
-                    className="w-20 h-20 object-cover"
+                    src={imgSrc}
+                    alt={`Product ${index + 1}`}
+                    className="w-20 h-20 object-contain"
                   />
                 </div>
-                <h3 className="font-semibold text-gray-800">Module {item}</h3>
-                <p className="text-gray-500 text-sm">300DHA</p>
+                <h3 className="font-semibold text-gray-800">Module 1</h3>
+                <p className="text-gray-500 text-sm">30000DA</p>
               </div>
             ))}
           </div>
