@@ -4,7 +4,7 @@ import Logo from './assets/Logo.svg';
 import QRIcon from './assets/QR.svg';
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import BgJoinUs from './assets/bg-JoinUS.png';
-import newWood from './assets/newWood.png';
+import newWood from './assets/NewWood.png';
 import { Truck, CreditCard, Lock, Phone as LucidePhone } from 'lucide-react';
 import HeroCompo from './assets/Hero_compo.png';
 import heroimg2 from './assets/Hero_img2.png'
