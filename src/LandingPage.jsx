@@ -14,7 +14,6 @@ import './styles/animations.css';
 
 const LandingPage = () => {
   useEffect(() => {
-    // Initialize scroll animations
     const observer = initScrollAnimations();
     
     return () => {

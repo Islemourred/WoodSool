@@ -7,13 +7,11 @@ const Navbar = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 font-sans">
-      {/* Navbar */}
       <div className="flex items-center justify-between px-4 md:px-8 py-4 border-b border-gray-100">
         <div className="flex items-center">
           <img src={Logo} alt="Logo" className="h-10 w-10 md:h-12 md:w-12 object-contain" />
         </div>
         
-        {/* Desktop Navigation */}
         <nav className="hidden lg:flex flex-1 justify-center">
           <ul className="flex space-x-8 text-gray-700 font-medium">
             <li>
@@ -31,7 +29,6 @@ const Navbar = () => {
           </ul>
         </nav>
         
-        {/* Desktop Search */}
         <div className="hidden md:flex items-center space-x-4">
           <div className="relative">
             <input
@@ -46,7 +43,6 @@ const Navbar = () => {
           </div>
         </div>
         
-        {/* Mobile Menu Button */}
         <button 
           className="lg:hidden p-2"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -59,7 +55,6 @@ const Navbar = () => {
         </button>
       </div>
       
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-white border-b border-gray-100 px-4 py-4">
           <nav className="mb-4">
