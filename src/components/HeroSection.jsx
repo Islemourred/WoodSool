@@ -37,7 +37,7 @@ const HeroSection = () => {
       id="home" 
       className="hero-animate flex flex-col items-center justify-center py-8 md:py-16 my-4 md:my-8 relative"
     >
-      <img src={HeroCompo} alt="Hero Compo" className="hidden md:block absolute top-12 -left-12 w-32 h-32 w-48 z-20 rotate-[-10deg] hero-compo-slide" />
+      <img src={HeroCompo} alt="Hero Compo" className="absolute top-4 md:top-12 -left-4 md:-left-12 w-20 h-20 md:w-48 md:h-48 z-20 rotate-[-10deg] hero-compo-slide" />
       <div className="w-full max-w-7xl h-full rounded-tl-[100px] md:rounded-tl-[300px] rounded-tr-[50px] md:rounded-tr-[100px] rounded-br-[10px] rounded-bl-[75px] md:rounded-bl-[150px] overflow-hidden mb-6 relative h-64 md:h-96">
         <img src={HeroBg} alt="Woodworking craftsman" className="w-full h-full object-cover" />
         <div className="absolute inset-0"></div>
