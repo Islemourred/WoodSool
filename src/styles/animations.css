@@ -1,0 +1,91 @@
+.fade-in-letter {
+  animation: fadeInLetter 0.1s ease-in-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInLetter {
+  to {
+    opacity: 1;
+  }
+}
+
+.typing-cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.hero-compo-slide {
+  animation: slideInFromLeft 1.5s ease-out;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-500px) rotate(-10deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) rotate(-10deg);
+    opacity: 1;
+  }
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* CSS-only scroll animations */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.scroll-animate.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger animations for grid items */
+.scroll-animate-stagger {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.scroll-animate-stagger.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay for staggered animations */
+.scroll-animate-stagger:nth-child(1) { transition-delay: 0.1s; }
+.scroll-animate-stagger:nth-child(2) { transition-delay: 0.2s; }
+.scroll-animate-stagger:nth-child(3) { transition-delay: 0.3s; }
+.scroll-animate-stagger:nth-child(4) { transition-delay: 0.4s; }
+.scroll-animate-stagger:nth-child(5) { transition-delay: 0.5s; }
+.scroll-animate-stagger:nth-child(6) { transition-delay: 0.6s; }
+
+/* Hero section special animation */
+.hero-animate {
+  animation: heroFadeIn 1.2s ease-out forwards;
+}
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} 
