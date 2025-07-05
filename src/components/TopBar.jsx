@@ -10,7 +10,9 @@ const TopBar = () => {
       </div>
       <div className="flex items-center gap-2">
         <Instagram className="w-4 h-4 mr-1" />
-        <span className="tracking-wide text-xs md:text-sm">Woodsool</span>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="tracking-wide text-xs md:text-sm hover:underline">
+          Woodsool
+        </a>
       </div>
     </div>
   );
