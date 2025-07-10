@@ -10,6 +10,32 @@ const NewArrivalsSection = () => {
   const [popupOpen, setPopupOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const scrollRef = useRef(null);
+  // Drag-to-scroll state
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
+  const handleMouseDown = (e) => {
+    isDragging.current = true;
+    startX.current = e.pageX - scrollRef.current.offsetLeft;
+    scrollLeft.current = scrollRef.current.scrollLeft;
+    scrollRef.current.classList.add('cursor-grabbing');
+  };
+  const handleMouseLeave = () => {
+    isDragging.current = false;
+    scrollRef.current.classList.remove('cursor-grabbing');
+  };
+  const handleMouseUp = () => {
+    isDragging.current = false;
+    scrollRef.current.classList.remove('cursor-grabbing');
+  };
+  const handleMouseMove = (e) => {
+    if (!isDragging.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.2; // scroll-fast
+    scrollRef.current.scrollLeft = scrollLeft.current - walk;
+  };
 
   const newArrivals = [
     {
@@ -81,7 +107,15 @@ const NewArrivalsSection = () => {
           <h2 className="text-2xl md:text-4xl font-bold text-orange-400 mb-4 md:mb-0">New Arrivals</h2>
           <button onClick={handleScrollRight} className="text-orange-400 hover:text-orange-500 flex items-center gap-1 text-sm md:text-base">More Products <span>→</span></button>
         </div>
-        <div ref={scrollRef} className="flex gap-4 md:gap-8 overflow-x-auto pb-4 scrollbar-hide" style={{scrollbarWidth: 'none'}}>
+        <div
+          ref={scrollRef}
+          className="flex gap-4 md:gap-8 overflow-x-auto pb-4 scrollbar-hide cursor-grab"
+          style={{scrollbarWidth: 'none'}}
+          onMouseDown={handleMouseDown}
+          onMouseLeave={handleMouseLeave}
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
+        >
           {newArrivals.map((product, index) => (
             <div key={index} className="scroll-animate-stagger min-w-[220px] md:min-w-[260px] max-w-[220px] md:max-w-[260px] bg-white rounded-xl shadow p-4 flex flex-col items-center relative">
               <button onClick={() => handleToggleFavorite(index)} className="absolute top-4 right-4 z-10">
