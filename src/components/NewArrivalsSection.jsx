@@ -8,6 +8,7 @@ import PopupOrderForm from './PopupOrderForm';
 const NewArrivalsSection = () => {
   const [favoriteArrivals, setFavoriteArrivals] = useState(Array(6).fill(false));
   const [popupOpen, setPopupOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const scrollRef = useRef(null);
 
   const newArrivals = [
@@ -65,7 +66,8 @@ const NewArrivalsSection = () => {
     setFavoriteArrivals(favs => favs.map((f, i) => i === idx ? !f : f));
   };
 
-  const handleAddToCartClick = () => {
+  const handleAddToCartClick = (product) => {
+    setSelectedProduct(product);
     setPopupOpen(true);
   };
 
@@ -92,14 +94,14 @@ const NewArrivalsSection = () => {
               <div className="w-full h-28 md:h-36 flex items-center justify-center mb-4">
                 <img src={product.img} alt={product.name} className="h-24 md:h-32 object-contain rounded-lg" />
               </div>
-              <button className="w-full bg-orange-400 text-white py-2 rounded-md text-xs md:text-sm font-semibold mb-2 hover:bg-orange-500 transition" onClick={handleAddToCartClick}>Add to cart</button>
+              <button className="w-full bg-orange-400 text-white py-2 rounded-md text-xs md:text-sm font-semibold mb-2 hover:bg-orange-500 transition" onClick={() => handleAddToCartClick(product)}>Add to cart</button>
               <h3 className="font-semibold text-gray-800 text-sm md:text-base text-center">{product.name}</h3>
               <p className="text-gray-500 text-xs md:text-sm text-center">{product.price}</p>
             </div>
           ))}
         </div>
       </div>
-      <PopupOrderForm isOpen={popupOpen} onClose={() => setPopupOpen(false)} />
+      <PopupOrderForm isOpen={popupOpen} onClose={() => setPopupOpen(false)} product={selectedProduct} />
     </>
   );
 };

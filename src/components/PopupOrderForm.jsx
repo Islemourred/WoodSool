@@ -9,7 +9,7 @@ const wilayas = [
   'Béni Abbès', 'In Salah', 'In Guezzam', 'Touggourt', 'Djanet', 'El M’Ghair', 'El Meniaa'
 ];
 
-const PopupOrderForm = ({ isOpen, onClose, onSubmit }) => {
+const PopupOrderForm = ({ isOpen, onClose, onSubmit, product }) => {
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
@@ -49,6 +49,15 @@ const PopupOrderForm = ({ isOpen, onClose, onSubmit }) => {
           &times;
         </button>
         <h2 className="text-2xl font-bold mb-6 text-orange-400 text-center">Order Form</h2>
+
+        {/* Product Info at the top */}
+        {product && (
+          <div className="flex flex-col items-center mb-4">
+            <img src={product.img} alt={product.name} className="w-24 h-24 object-contain rounded-lg mb-2" />
+            <h3 className="font-semibold text-gray-800 text-lg">{product.name}</h3>
+            <p className="text-orange-500 text-base font-bold">{product.price}</p>
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
