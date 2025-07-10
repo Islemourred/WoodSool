@@ -17,23 +17,45 @@ const PopupOrderForm = ({ isOpen, onClose, onSubmit, product }) => {
     wilaya: wilayas[0],
   });
   const [submitting, setSubmitting] = useState(false);
+  const [notification, setNotification] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
-    const data = { ...form };
-    //API here
-    // await api.sendOrder(data);
-    if (onSubmit) onSubmit(data);
-    setTimeout(() => {
-      setSubmitting(false);
-      onClose();
-    }, 1000);
+    const orderData = {
+      ...form,
+      product: product ? {
+        name: product.name,
+        price: product.price,
+        img: product.img,
+      } : null,
+    };
+    try {
+      const response = await fetch('', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderData),
+      });
+      if (!response.ok) throw new Error('Order failed');
+      setNotification({ type: 'success', message: 'Order placed successfully!' });
+      if (onSubmit) onSubmit(orderData);
+      setTimeout(() => {
+        setNotification(null);
+        setSubmitting(false);
+        onClose();
+      }, 2500);
+    } catch (err) {
+      setNotification({ type: 'error', message: 'Something went wrong. Please try again!' });
+      setTimeout(() => {
+        setNotification(null);
+        setSubmitting(false);
+      }, 2500);
+    }
   };
 
   if (!isOpen) return null;
@@ -41,6 +63,14 @@ const PopupOrderForm = ({ isOpen, onClose, onSubmit, product }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 transition-opacity animate-fadeIn">
       <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md transform transition-all scale-100 animate-popIn relative">
+        {notification && (
+          <div
+            className={`fixed left-1/2 top-8 z-50 px-6 py-3 rounded-xl shadow-lg text-white text-center text-base font-semibold animate-popIn ${notification.type === 'success' ? 'bg-green-500' : 'bg-red-500'}`}
+            style={{ transform: 'translateX(-50%)', minWidth: 220 }}
+          >
+            {notification.message}
+          </div>
+        )}
         <button
           className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold"
           onClick={onClose}
@@ -106,7 +136,6 @@ const PopupOrderForm = ({ isOpen, onClose, onSubmit, product }) => {
           </button>
         </form>
       </div>
-      {/* Animations */}
       <style>{`
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .animate-fadeIn { animation: fadeIn 0.3s; }
