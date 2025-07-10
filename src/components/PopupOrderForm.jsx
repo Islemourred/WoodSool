@@ -27,7 +27,7 @@ const PopupOrderForm = ({ isOpen, onClose, onSubmit, product }) => {
     e.preventDefault();
     setSubmitting(true);
     const data = { ...form };
-    // TODO: Call API here
+    //API here
     // await api.sendOrder(data);
     if (onSubmit) onSubmit(data);
     setTimeout(() => {
@@ -50,7 +50,6 @@ const PopupOrderForm = ({ isOpen, onClose, onSubmit, product }) => {
         </button>
         <h2 className="text-2xl font-bold mb-6 text-orange-400 text-center">Order Form</h2>
 
-        {/* Product Info at the top */}
         {product && (
           <div className="flex flex-col items-center mb-4">
             <img src={product.img} alt={product.name} className="w-24 h-24 object-contain rounded-lg mb-2" />
