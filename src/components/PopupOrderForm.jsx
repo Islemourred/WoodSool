@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ImageCarousel } from './ProductGrid';
 
 const wilayas = [
   'Adrar', 'Chlef', 'Laghouat', 'Oum El Bouaghi', 'Batna', 'Béjaïa', 'Biskra', 'Béchar', 'Blida', 'Bouira',
@@ -82,7 +83,7 @@ const PopupOrderForm = ({ isOpen, onClose, onSubmit, product }) => {
 
         {product && (
           <div className="flex flex-col items-center mb-4">
-            <img src={product.img} alt={product.name} className="w-24 h-24 object-contain rounded-lg mb-2" />
+            <ImageCarousel images={product.imgs ? product.imgs : [product.img]} alt={product.name} />
             <h3 className="font-semibold text-gray-800 text-lg">{product.name}</h3>
             <p className="text-orange-500 text-base font-bold">{product.price}</p>
           </div>
